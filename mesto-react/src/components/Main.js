@@ -8,23 +8,36 @@ function Main(props) {
     const [userAvatar, setUserAvatar] = useState('');
     const [cards, setCards] = useState([]);
 
+    function onCardClick(card) {
+        props.onImagePopup(card);
+    }
+
     useEffect(() => {
-        api.getUserInfo().then(data => {
-            setUserName(data.name);
-            setUserDescription(data.about);
-            setUserAvatar(data.avatar);
-        });
+        api.getUserInfo()
+            .then(data => {
+                setUserName(data.name);
+                setUserDescription(data.about);
+                setUserAvatar(data.avatar);
+            })
+            .catch((res) => {
+                console.log(`Что-то пошло не так: ${res.statusText}`);
+            });
     }, []);
 
     useEffect(() => {
-        api.getCardList().then(data => {
-            setCards(data.map((item) => ({
-                likes: item.likes.length,
-                link: item.link,
-                name: item.name,
-                id: item._id
-            })));
-        });
+        api.getCardList()
+            .then(data => {
+                setCards(data.map((item) => ({
+                    onCardClick: onCardClick,
+                    likes: item.likes.length,
+                    link: item.link,
+                    name: item.name,
+                    id: item._id
+                })));
+            })
+            .catch((res) => {
+                console.log(`Что-то пошло не так: ${res.statusText}`);
+            });
     }, []);
 
     return (

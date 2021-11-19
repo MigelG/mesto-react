@@ -1,9 +1,14 @@
 function Card(props) {
+
+    function handleClick() {
+        props.onCardClick(props);
+    }
+
     return (
         <article className="place">
             <button type="button" className="button place__delete-button"></button>
             <div className="place__image-container">
-                <img className="place__image" src={props.link} />
+                <img onClick={handleClick} className="place__image" src={props.link} alt={props.name} />
             </div>
             <div className="place__caption">
                 <h2 className="place__title">{props.name}</h2>

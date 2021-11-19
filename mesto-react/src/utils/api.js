@@ -67,7 +67,7 @@ class Api {
 
     _checkResponse(res) {
         if (res.ok) { return res.json() }
-        return Promise.reject('Произошла какая-то ошибка');
+        return Promise.reject(res);
     }
 
 }
