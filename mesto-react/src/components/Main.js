@@ -22,14 +22,14 @@ function Main(props) {
 
             <section className="places">
                 {
-                    props.cards.map(({ id, name, link, likes, onCardClick, owner }) => <Card
-                        key={id}
-                        _id={id}
-                        name={name}
-                        link={link}
-                        likes={likes}
-                        onCardClick={onCardClick}
-                        owner={owner}
+                    props.cards.map((card) => <Card
+                        key={card._id}
+                        _id={card._id}
+                        name={card.name}
+                        link={card.link}
+                        likes={card.likes}
+                        onCardClick={props.onCardClick}
+                        owner={card.owner}
                         onCardLike={props.onCardLike}
                         onCardDelete={props.onCardDelete}
                     />)

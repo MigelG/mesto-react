@@ -17,14 +17,8 @@ function App() {
   useEffect(() => {
     api.getCardList()
       .then(data => {
-        setCards(data.map((item) => ({
-          onCardClick: handleCardClick,
-          likes: item.likes,
-          link: item.link,
-          name: item.name,
-          id: item._id,
-          owner: item.owner
-        })));
+        console.log(data);
+        setCards(data);
       })
       .catch((res) => {
         console.log(`Что-то пошло не так: ${res.statusText}`);
@@ -170,6 +164,7 @@ function App() {
             cards={cards}
             onCardLike={handleCardLike}
             onCardDelete={handleCardDelete}
+            onCardClick={handleCardClick}
           />
           <Footer />
 
